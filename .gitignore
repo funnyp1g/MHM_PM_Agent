@@ -1,0 +1,6 @@
+.DS_Store
+.opencode/node_modules/
+*.log
+.env
+.env.*
+!.env.example

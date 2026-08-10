@@ -1,0 +1,29 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+context: |
+  This is the "PM Agent" project — a framework for AI-assisted product management.
+  Purpose: generate high-quality, implementable Chinese PRD documents for an existing
+  product, understanding product knowledge and feature relations.
+
+  Key directories:
+  - product-knowledge/ : product knowledge base (overview, features/, relations.md, glossary.md)
+  - docs/prd/          : output PRD documents (Chinese Markdown)
+  - .opencode/         : PM agent, skills (product-knowledge, requirement-analysis, prd-writing), commands
+
+  Conventions:
+  - All PRD documents are written in Chinese Markdown
+  - PRD must reference relations.md for feature relations and glossary.md for terminology
+  - Use the pm agent for requirement analysis and PRD writing
+  - Product knowledge must be read before writing any PRD
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+rules:
+  proposal:
+    - Keep proposals concise and focused on a single change
+    - Always include affected existing features (reference relations.md)
+  tasks:
+    - Break tasks into small, testable chunks
