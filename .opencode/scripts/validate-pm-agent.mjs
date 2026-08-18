@@ -19,6 +19,7 @@ const requiredKnowledge = [
 ];
 
 const requiredCore = [
+  "pm-agent-core/AGENT.md",
   "pm-agent-core/README.md",
   "pm-agent-core/ROLE.md",
   "pm-agent-core/KNOWLEDGE.md",
@@ -100,15 +101,25 @@ function validatePrd(relativePath) {
     warnings.push(`${relativePath} 未说明效果衡量或指标状态`);
   }
 
-  const pages = [...content.matchAll(/`([a-z][a-z0-9-]+)`/g)].map((match) => match[1]);
   const pageRegistry = read("product-knowledge/ui/pages.md");
   const glossary = read("product-knowledge/glossary.md");
   const known = new Set([
     ...[...pageRegistry.matchAll(/`([a-z][a-z0-9-]+)`/g)].map((match) => match[1]),
     ...[...glossary.matchAll(/`([a-z][a-z0-9-]+)`/g)].map((match) => match[1]),
   ]);
+  const openDesignIdentifiers = new Set(
+    content
+      .split("\n")
+      .filter((line) => /Open Design/.test(line))
+      .flatMap((line) => [...line.matchAll(/`([a-z][a-z0-9-]+)`/g)].map((match) => match[1])),
+  );
+  const pages = [...content.matchAll(/`([a-z][a-z0-9-]+)`/g)]
+    .map((match) => match[1])
+    .filter((page) => !openDesignIdentifiers.has(page));
   for (const page of new Set(pages)) {
-    if (!known.has(page) && !new RegExp(`${page}[^\n]*(临时|待注册|新增)`).test(content)) {
+    if (!known.has(page)
+      && new RegExp(`页面ID[^\n]*${page}|${page}[^\n]*(页面ID|页面)`).test(content)
+      && !new RegExp(`${page}[^\n]*(临时|待注册|新增)`).test(content)) {
       warnings.push(`${relativePath} 引用了未注册页面ID：${page}；请标注为临时ID或补充页面注册`);
     }
   }

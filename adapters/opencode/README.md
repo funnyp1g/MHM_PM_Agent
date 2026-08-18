@@ -1,6 +1,6 @@
 # OpenCode 适配说明
 
-保留现有 `.opencode/` 配置以兼容 OpenCode。核心规则位于 `pm-agent-core/`，OpenCode 只是其中一个宿主适配器。
+保留 `.opencode/` 作为 OpenCode 的宿主适配入口。OpenCode 读取 `.opencode/agent/pm.md` 或命令后，必须先读取并严格遵循 `pm-agent-core/AGENT.md`。该文件是所有宿主 Agent 共用的唯一执行入口和权威规则源。
 
 可用命令：
 

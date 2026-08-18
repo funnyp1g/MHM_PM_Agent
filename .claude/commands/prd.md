@@ -1,9 +1,9 @@
 # 生成 PRD
 
-先读取 `pm-agent-core/prompts/prd.md`、`pm-agent-core/WORKFLOW.md` 和 `pm-agent-core/OUTPUT.md`，再处理以下需求：
+开始执行前，必须读取并严格遵循 `pm-agent-core/AGENT.md`。该文件是所有宿主 Agent 共用的唯一执行入口和权威规则源。
 
-```text
+## 需求描述
+
 $ARGUMENTS
-```
 
-必须先执行 `pm-agent-core/BOUNDARIES.md` 的强制澄清检查。遇到不确定的名词含义、业务逻辑或交互样式时，先提问并等待回答；得到回答后继续。涉及页面时，PRD 完成后提示用户是否需要 Open Design 原型。
+按照统一规范完成需求澄清、产品知识加载、需求拆解、功能关联分析、PRD 输出和校验。若需求涉及页面，PRD 完成后再根据用户确认决定是否制作 Open Design 原型。

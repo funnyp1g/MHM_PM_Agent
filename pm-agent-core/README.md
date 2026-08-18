@@ -1,60 +1,34 @@
 # PM Agent Core
 
-这是 PM Agent 的平台无关核心规则。它不依赖 OpenCode、Codex 或 Claude Code 的特定命令机制，任何能读取 Markdown 文件的 Agent 都可以按本目录执行。
+## 唯一执行入口
 
-## 核心文件
+`AGENT.md` 是 PM Agent 的跨平台唯一执行入口和权威规则源。Claude Code、Codex、OpenCode 及其他宿主 Agent 开始任何任务前，必须先读取并遵循该文件。
 
-| 文件 | 用途 |
-|---|---|
-| `ROLE.md` | Agent 角色、目标和输出边界 |
-| `KNOWLEDGE.md` | 产品知识读取顺序、证据等级和冲突处理 |
-| `BOUNDARIES.md` | 必须暂停提问的边界条件 |
-| `WORKFLOW.md` | 从需求到 PRD 的标准流程 |
-| `OUTPUT.md` | PRD 输出结构和完成门槛 |
-| `REVIEW.md` | PRD 评审维度和结论格式 |
-| `prompts/prd.md` | 通用 PRD 调用模板 |
-| `prompts/review.md` | 通用 PRD 评审调用模板 |
+它统一规定：
 
-## 快速调用
+- Agent 角色和输出边界；
+- 产品知识库读取顺序与证据等级；
+- 强制澄清边界；
+- 需求拆解、功能关联和页面影响分析；
+- PRD 输出、校验与交付；
+- PRD 评审；
+- Open Design 和 OpenSpec 使用边界；
+- 产品知识库维护。
 
-向任意 Agent 发送：
+## 平台入口
 
-```text
-请加载 pm-agent-core/README.md，并按 pm-agent-core/prompts/prd.md 执行以下需求：
-〈需求描述〉
-```
+- Codex：根目录 `AGENTS.md`；
+- Claude Code：根目录 `CLAUDE.md` 和 `.claude/commands/`；
+- OpenCode：`.opencode/agent/pm.md` 和 `.opencode/commands/`。
 
-或直接使用宿主适配入口：
-
-- Codex：读取根目录 `AGENTS.md`，直接提出需求；
-- Claude Code：读取根目录 `CLAUDE.md`，使用 `/prd` 或 `/pm-review`；
-- OpenCode：继续使用 `/prd`、`/pm-review`、`/pm-knowledge`。
+平台文件只负责宿主所需的加载、命令和参数传递，不得重新定义业务规则。`ROLE.md`、`KNOWLEDGE.md`、`BOUNDARIES.md`、`WORKFLOW.md`、`OUTPUT.md`、`REVIEW.md` 和 `prompts/` 保留为兼容性拆分文档；如与 `AGENT.md` 不一致，以 `AGENT.md` 为准。
 
 ## 产品知识库
 
-核心规则默认使用同级目录下的 `product-knowledge/`，至少读取：
-
-```text
-README.md
-product-overview.md
-relations.md
-glossary.md
-data-dictionary.md
-metrics.md
-open-questions.md
-ui/README.md
-ui/design-system.md
-ui/pages.md
-最新 device-observation-*.md
-相关 features/*.md
-```
+统一规范默认使用同级目录下的 `product-knowledge/`。相关知识包括产品概览、功能模块、关联图谱、术语、数据字典、指标、待确认项、页面设计系统、页面注册表和最新实机观察。
 
 ## 可选能力
 
-- Open Design：只在用户确认后调用，用于制作和评审原型；不影响 PRD 独立产出。
-- OpenSpec：只有用户明确要求变更追踪时调用。
-- `.opencode/scripts/validate-pm-agent.mjs`：用于校验知识库和 PRD 结构，不绑定特定 Agent。
-
-## 维护原则
-
-核心规则优先于平台适配器。平台适配器只能补充调用方式，不能改变“先提问、知识驱动、PRD 可独立完成、原型可选”等核心行为。
+- Open Design：只有用户确认后调用；
+- OpenSpec：只有用户明确要求变更追踪后调用；
+- `.opencode/scripts/validate-pm-agent.mjs`：校验知识库和 PRD 结构。

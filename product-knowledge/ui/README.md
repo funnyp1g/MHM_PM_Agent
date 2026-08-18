@@ -6,10 +6,11 @@
 
 | 路径 | 内容 | 状态 |
 |------|------|------|
-| `design-system.md` | 颜色/字体/布局/组件样式/交互模式（设计系统规范） | 已填充（2026-08-07） |
+| `design-system.md` | 颜色/字体/布局/组件样式/交互模式/AI 前端实现约束（设计系统规范） | 已补充（2026-08-11） |
 | `pages.md` | 页面注册总表 + 页面快照（导航/布局/关键元素/状态/跳转） | 已填充 5 个结构化快照；其余见实机观察或待补充 |
 | `device-observation-2026-08-07.md` | iPhone 16 Pro 实机页面观察、差异记录与截图索引 | 已填充（2026-08-07） |
 | `source/APP页面设计规范及功能位置参考.md` | 设计规范原始文档（多店版）留档 | 留档 |
+| `source/卖货猫组件应用规范-AI前端开发指南.md` | Figma 组件应用规范与 AI 前端实现指南留档 | 已新增（2026-08-11） |
 | `assets/` | 截图/线框留档（人工核对用） | 已新增 `observed/` 实机截图 |
 | `prototypes/` | Open Design 原型记录、页面映射与评审结论 | 按需求新增 |
 
@@ -74,3 +75,12 @@
 原型评审至少核对页面ID、页面结构、设计系统、文案、字段、业务规则、状态、跳转和异常反馈。评审结论先回写 PRD；新增或改版页面确认后，再更新 `pages.md`、`relations.md` 和对应功能文件。推荐在 `ui/prototypes/` 下按 `YYYY-MM-DD-<feature-slug>.md` 保存原型记录。
 
 Open Design 原型制作与 OpenSpec 变更追踪相互独立。只有用户明确要求变更追踪，或明确要求 `propose/apply/archive` 时，才启动 OpenSpec。
+
+### Codex 调用与交付约束
+
+- 在 Codex 中必须连接本机 Open Design 应用及其 MCP/daemon；不得使用 `opencode.json`、`.opencode/` 或 OpenCode CLI 代替 Open Design。
+- `config/open-design.example.json` 仅是占位配置模板，不是实际调用入口；其中的 `<OPEN_DESIGN_DAEMON_CLI_PATH>` 和 `<OPEN_DESIGN_SOCKET_PATH>` 不能直接执行。
+- 不得直接生成普通 HTML/CSS/JS 作为 Open Design 替代品。HTML 只有在 Open Design 项目内生成、注册并可预览时，才算 Open Design 项目文件。
+- 若 Open Design MCP 未出现在当前工具列表、Open Design 应用/daemon 未运行或原型未成功注册，必须明确报告不可用/失败，不得伪造项目、版本、链接或评审状态。
+- 多状态页面优先采用“左侧真实页面 + 右侧原型评审控制台”。右侧控制台只服务于原型评审，不属于正式 App 页面；真实业务提示必须仍显示在左侧页面对应位置。
+- 评审记录至少保存 Open Design 项目标识、页面/产物标识、版本标识、页面映射、预览入口、状态覆盖、差异和待确认项。

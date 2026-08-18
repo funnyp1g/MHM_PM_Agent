@@ -1,11 +1,6 @@
 # 通用 PRD 评审模板
 
-请加载并执行：
-
-1. `pm-agent-core/ROLE.md`
-2. `pm-agent-core/KNOWLEDGE.md`
-3. `pm-agent-core/BOUNDARIES.md`
-4. `pm-agent-core/REVIEW.md`
+开始任何 PRD 评审前，必须先读取并严格遵循 `pm-agent-core/AGENT.md`。该文件是所有宿主 Agent 共用的唯一执行入口和权威规则源。
 
 评审对象：
 
@@ -13,4 +8,4 @@
 {{PRD_PATH_OR_CONTENT}}
 ```
 
-发现名词含义、业务逻辑或交互样式不确定时，暂停并提问；得到回答后继续评审。
+按统一规范加载产品知识并评审；若发现名词含义、业务逻辑或交互样式存在歧义，必须暂停并向用户提问。评审结果按“阻塞 / 重要 / 建议”输出，并运行项目校验脚本。

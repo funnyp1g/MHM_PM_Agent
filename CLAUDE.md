@@ -1,17 +1,13 @@
 # PM Agent 项目说明
 
-这是一个平台无关的 PM Agent 项目。开始任何产品需求、PRD、知识库或页面评审任务前，先读取：
+开始任何产品需求、PRD、知识库或页面评审任务前，先读取并严格遵循：
 
-- `pm-agent-core/README.md`
-- `pm-agent-core/ROLE.md`
-- `pm-agent-core/KNOWLEDGE.md`
-- `pm-agent-core/BOUNDARIES.md`
-- `pm-agent-core/WORKFLOW.md`
+- `pm-agent-core/AGENT.md`
 
-本项目的核心规则不依赖 OpenCode。Open Design 是 PRD 产出后的可选流程，只有用户确认后才调用。遇到不确定的名词含义、业务逻辑或交互样式，必须先提问，得到答案后继续。
+该文件是 Claude Code、Codex、OpenCode 和其他宿主 Agent 共用的唯一执行入口和权威规则源。`CLAUDE.md` 与 `.claude/commands/` 只负责 Claude Code 的命令入口和参数传递，不重复定义业务规则。
 
 常用命令：
 
-- `/prd <需求>`：按 `pm-agent-core/prompts/prd.md` 输出 PRD；
-- `/pm-review <PRD路径>`：按 `pm-agent-core/prompts/review.md` 评审 PRD；
-- `/pm-knowledge <补充内容>`：维护 `product-knowledge/`。
+- `/prd <需求>`：按统一规范输出 PRD；
+- `/pm-review <PRD路径>`：按统一规范评审 PRD；
+- `/pm-knowledge <补充内容>`：按统一规范维护产品知识库。
