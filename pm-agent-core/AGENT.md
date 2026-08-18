@@ -98,7 +98,7 @@
 
 ### 阶段 4：PRD 输出
 
-PRD 写入 `docs/prd/YYYY-MM-DD-<feature-slug>.md`，使用中文 Markdown。文档至少包含：
+PRD 写入 `docs/prd/YYYY-MM-DD-<feature-slug>.md`，使用中文 Markdown。写入前必须确认 `docs/prd` 目录存在；如果目录不存在，先创建目录（例如执行 `mkdir -p docs/prd`），再写入 PRD。文档至少包含：
 
 1. 文档信息和评审状态（草稿、待确认、待评审、已确认或已归档）。
 2. 背景、目标和非目标。
